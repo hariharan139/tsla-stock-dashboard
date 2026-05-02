@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Stock Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>📊 TSLA Stock Dashboard</h1>
+
+      <div class="buttons">
+        <a href="/run">Process Data</a>
+        <a href="/preview">Preview CSV</a>
+        <a href="/store">Store in DB</a>
+        <a href="/db">View DB</a>
+      </div>
+
+      <h2>📈 Monthly Change</h2>
+      <img src="{{ url_for('static', filename='graph.png') }}" />
+    </div>
+  </body>
+</html>
