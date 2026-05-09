@@ -1,15 +1,18 @@
 import sqlite3
 
+def get_connection():
+    return sqlite3.connect("stock.db")
+
 def init_db():
-    conn = sqlite3.connect("stock.db")
+    conn = get_connection()
 
     conn.execute("""
-    CREATE TABLE IF NOT EXISTS stock_data (
+    CREATE TABLE IF NOT EXISTS stocks (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        symbol TEXT,
         date TEXT,
         adj_close REAL,
-        pct_change REAL,
-        month_change REAL
+        pct_change REAL
     )
     """)
 

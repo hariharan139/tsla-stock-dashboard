@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Edit Stock</title>
+  </head>
+  <body>
+    <h2>Edit Stock</h2>
+
+    <form method="POST" action="/update/{{ stock[0] }}">
+      <p>ID: {{ stock[0] }}</p>
+      <p>Symbol: {{ stock[1] }}</p>
+      <p>Date: {{ stock[2] }}</p>
+
+      <label>Adj Close:</label>
+      <input type="text" name="value" value="{{ stock[3] }}" required />
+
+      <br /><br />
+      <button type="submit">Update</button>
+    </form>
+  </body>
+</html>

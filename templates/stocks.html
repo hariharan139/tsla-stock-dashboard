@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Stock Data</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>📊 Stored Stock Data</h1>
+
+      <div class="card">
+        <table>
+          <tr>
+            <th>ID</th>
+            <th>Symbol</th>
+            <th>Date</th>
+            <th>Adj Close</th>
+            <th>% Change</th>
+            <th>Action</th>
+          </tr>
+
+          {% for row in data %}
+          <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+            <td>{{ row[4] }}</td>
+            <td>
+              <a href="/edit/{{ row[0] }}">Edit</a>
+              |
+              <a class="delete-btn" href="/delete/{{ row[0] }}">Delete</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

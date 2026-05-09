@@ -9,17 +9,28 @@
   </head>
   <body>
     <div class="container">
-      <h1>📊 TSLA Stock Dashboard</h1>
+      <h1>📊 Stock Dashboard</h1>
 
-      <div class="buttons">
-        <a href="/run">Process Data</a>
-        <a href="/preview">Preview CSV</a>
-        <a href="/store">Store in DB</a>
-        <a href="/db">View DB</a>
+      <div class="card">
+        <h2>Fetch Stock Data</h2>
+        <div class="buttons">
+          <a href="/fetch/TSLA">TSLA</a>
+          <a href="/fetch/AAPL">AAPL</a>
+          <a href="/fetch/MSFT">MSFT</a>
+        </div>
       </div>
 
-      <h2>📈 Monthly Change</h2>
-      <img src="{{ url_for('static', filename='graph.png') }}" />
+      <div class="card">
+        <h2>Database</h2>
+        <div class="buttons">
+          <a href="/stocks">View Stored Data</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>📈 Monthly Graph</h2>
+        <img src="{{ url_for('static', filename='graph.png') }}?v=2" />
+      </div>
     </div>
   </body>
 </html>

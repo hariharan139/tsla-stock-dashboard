@@ -1,24 +1,87 @@
 body {
-  font-family: Arial;
-  background: #f4f4f4;
+  font-family: "Segoe UI", sans-serif;
+  background: #f4f6f8;
+  margin: 0;
+  padding: 0;
 }
 
+/* Container */
 .container {
-  width: 80%;
+  width: 85%;
   margin: auto;
   text-align: center;
+  padding: 20px;
 }
 
+/* Heading */
+h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Buttons */
 .buttons a {
+  display: inline-block;
   margin: 10px;
-  padding: 10px;
-  background: blue;
+  padding: 12px 18px;
+  background: #007bff;
   color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.buttons a:hover {
+  background: #0056b3;
+}
+
+/* Card Layout */
+.card {
+  background: white;
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th {
+  background: #007bff;
+  color: white;
+  padding: 10px;
+}
+
+td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+  background: #f1f1f1;
+}
+
+/* Delete Button */
+.delete-btn {
+  color: white;
+  background: red;
+  padding: 6px 10px;
   text-decoration: none;
   border-radius: 5px;
 }
 
+.delete-btn:hover {
+  background: darkred;
+}
+
+/* Image */
 img {
   width: 700px;
   margin-top: 20px;
+  border-radius: 10px;
 }
