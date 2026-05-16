@@ -6,6 +6,8 @@ from services.stock_service import (
     delete_stock,
     update_stock
 )
+from ml.predict import predict_price
+import pandas as pd
 
 stock_bp = Blueprint('stock', __name__)
 
@@ -37,3 +39,24 @@ def update(id):
     value = request.form.get('value')
     update_stock(id, value)
     return "Updated!"
+
+@stock_bp.route('/predict')
+def predict():
+
+    df = pd.read_csv("output/processed_TSLA.csv")
+
+    latest = df.iloc[-1]
+
+    data = {
+        'Adj Close': latest['Adj Close'],
+        'pct_change': latest['pct_change'],
+        'prev_close': latest['Adj Close'],
+        'rolling_mean_5': df['Adj Close'].tail(5).mean()
+    }
+
+    prediction = predict_price(data)
+
+    return render_template(
+        "prediction.html",
+        prediction=prediction
+    )
