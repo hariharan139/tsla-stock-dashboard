@@ -60,3 +60,29 @@ def predict():
         "prediction.html",
         prediction=prediction
     )
+@stock_bp.route('/forecast')
+def forecast():
+
+    df = pd.read_csv(
+        "output/forecast_results.csv"
+    )
+
+    data = df.values.tolist()
+
+    return render_template(
+        "forecast.html",
+        data=data
+    )
+@stock_bp.route('/comparison')
+def comparison():
+
+    df = pd.read_csv(
+        "output/comparison_results.csv"
+    )
+
+    data = df.values.tolist()
+
+    return render_template(
+        "comparison.html",
+        data=data
+    )

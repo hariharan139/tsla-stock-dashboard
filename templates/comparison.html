@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Model Comparison</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>📊 Model Comparison</h1>
+
+      <div class="card">
+        <table>
+          <tr>
+            <th>Model</th>
+            <th>MAE</th>
+            <th>RMSE</th>
+          </tr>
+
+          {% for row in data %}
+
+          <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+          </tr>
+
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

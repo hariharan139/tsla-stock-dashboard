@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Forecast</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>📈 30-Day Forecast</h1>
+
+      <div class="card">
+        <img src="{{ url_for('static', filename='forecast_graph.png') }}" />
+      </div>
+
+      <div class="card">
+        <table>
+          <tr>
+            <th>Actual</th>
+            <th>LR</th>
+            <th>RF</th>
+            <th>SARIMA</th>
+          </tr>
+
+          {% for row in data %}
+
+          <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+          </tr>
+
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
