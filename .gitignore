@@ -1,8 +1,6 @@
-__pycache__/
-*.pyc
-*.db
-output/
-.env
 models/
 *.pkl
 __pycache__/
+*.pyc
+database/
+stock.db

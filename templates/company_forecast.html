@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Forecast</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>{{ ticker }} Forecast</h1>
+
+      <img
+        src="{{ url_for(
+
+'static',
+
+filename='graphs/' + ticker + '.png'
+
+) }}"
+      />
+
+      <table>
+        <tr>
+          <th>Actual</th>
+          <th>LR</th>
+          <th>RF</th>
+          <th>SARIMAX</th>
+        </tr>
+
+        {% for row in data %}
+
+        <tr>
+          <td>{{ row[0] }}</td>
+
+          <td>{{ row[1] }}</td>
+
+          <td>{{ row[2] }}</td>
+
+          <td>{{ row[3] }}</td>
+        </tr>
+
+        {% endfor %}
+      </table>
+    </div>
+  </body>
+</html>

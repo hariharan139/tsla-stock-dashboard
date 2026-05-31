@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Model Summary</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>📊 Model Summary</h1>
+
+      <table>
+        <tr>
+          <th>Ticker</th>
+          <th>LR</th>
+          <th>RF</th>
+          <th>SARIMAX</th>
+          <th>Best</th>
+        </tr>
+
+        {% for row in data %}
+
+        <tr>
+          <td>{{ row[0] }}</td>
+
+          <td>{{ row[1] }}</td>
+
+          <td>{{ row[2] }}</td>
+
+          <td>{{ row[3] }}</td>
+
+          <td>{{ row[4] }}</td>
+        </tr>
+
+        {% endfor %}
+      </table>
+    </div>
+  </body>
+</html>

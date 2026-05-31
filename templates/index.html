@@ -1,39 +1,44 @@
 <!doctype html>
 <html>
   <head>
-    <title>Stock Dashboard</title>
+    <title>StockSense AI</title>
+
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='style.css') }}"
     />
   </head>
+
   <body>
     <div class="container">
-      <h1>📊 Stock Dashboard</h1>
+      <h1>📈 StockSense AI Dashboard</h1>
 
-      <div class="card">
-        <h2>Fetch Stock Data</h2>
-        <div class="buttons">
-          <a href="/fetch/TSLA">TSLA</a>
-          <a href="/fetch/AAPL">AAPL</a>
-          <a href="/fetch/MSFT">MSFT</a>
-          <a href="/predict">Predict Price</a>
-          <a href="/forecast">30-Day Forecast</a>
+      <div class="buttons">
+        <a href="/top20"> Top20 </a>
 
-          <a href="/comparison">Compare Models</a>
-        </div>
+        <a href="/top50"> Top50 </a>
+
+        <a href="/top100"> Top100 </a>
+
+        <a href="/summary"> Model Summary </a>
       </div>
 
       <div class="card">
-        <h2>Database</h2>
-        <div class="buttons">
-          <a href="/stocks">View Stored Data</a>
-        </div>
-      </div>
+        <h2>Popular Companies</h2>
 
-      <div class="card">
-        <h2>📈 Monthly Graph</h2>
-        <img src="{{ url_for('static', filename='graph.png') }}?v=2" />
+        <a href="/company/TSLA"> TSLA </a>
+
+        <br /><br />
+
+        <a href="/company/AAPL"> AAPL </a>
+
+        <br /><br />
+
+        <a href="/company/MSFT"> MSFT </a>
+
+        <br /><br />
+
+        <a href="/company/NVDA"> NVDA </a>
       </div>
     </div>
   </body>

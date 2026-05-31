@@ -1,88 +1,124 @@
-from flask import Blueprint, render_template, request
-from services.stock_api import fetch_stock
-from services.stock_service import (
-    save_stock_data,
-    get_all_stocks,
-    delete_stock,
-    update_stock
-)
-from ml.predict import predict_price
+from flask import Blueprint
+from flask import render_template
 import pandas as pd
 
-stock_bp = Blueprint('stock', __name__)
+from services.top_companies import get_top_companies
+from ml.forecast import generate_forecast
 
-@stock_bp.route('/fetch/<symbol>')
-def fetch(symbol):
-    df = fetch_stock(symbol)
-    save_stock_data(symbol, df)
-    return f"{symbol} data fetched and stored!"
-@stock_bp.route('/edit/<int:id>')
-def edit(id):
-    data = get_all_stocks()
-    stock = [row for row in data if row[0] == id][0]
-    return render_template("edit.html", stock=stock)
-
-@stock_bp.route('/stocks')
-def stocks():
-    data = get_all_stocks()
-    return render_template("stocks.html", data=data)
+stock_bp = Blueprint(
+    'stock_bp',
+    __name__
+)
 
 
-@stock_bp.route('/delete/<int:id>')
-def delete(id):
-    delete_stock(id)
-    return "Deleted!"
-
-
-@stock_bp.route('/update/<int:id>', methods=['POST'])
-def update(id):
-    value = request.form.get('value')
-    update_stock(id, value)
-    return "Updated!"
-
-@stock_bp.route('/predict')
-def predict():
-
-    df = pd.read_csv("output/processed_TSLA.csv")
-
-    latest = df.iloc[-1]
-
-    data = {
-        'Adj Close': latest['Adj Close'],
-        'pct_change': latest['pct_change'],
-        'prev_close': latest['Adj Close'],
-        'rolling_mean_5': df['Adj Close'].tail(5).mean()
-    }
-
-    prediction = predict_price(data)
+@stock_bp.route('/')
+def home():
 
     return render_template(
-        "prediction.html",
-        prediction=prediction
+        'index.html'
     )
-@stock_bp.route('/forecast')
-def forecast():
+
+
+# Top20
+
+@stock_bp.route('/top20')
+def top20():
+
+    df = get_top_companies(20)
+
+    data = df.values.tolist()
+
+    return render_template(
+
+        'top_companies.html',
+
+        data=data,
+
+        title='Top 20 Companies'
+    )
+
+
+# Top50
+
+@stock_bp.route('/top50')
+def top50():
+
+    df = get_top_companies(50)
+
+    data = df.values.tolist()
+
+    return render_template(
+
+        'top_companies.html',
+
+        data=data,
+
+        title='Top 50 Companies'
+    )
+
+
+# Top100
+
+@stock_bp.route('/top100')
+def top100():
+
+    df = get_top_companies(100)
+
+    data = df.values.tolist()
+
+    return render_template(
+
+        'top_companies.html',
+
+        data=data,
+
+        title='Top 100 Companies'
+    )
+
+
+# Summary
+
+@stock_bp.route('/summary')
+def summary():
 
     df = pd.read_csv(
-        "output/forecast_results.csv"
+        "output/model_summary.csv"
     )
 
     data = df.values.tolist()
 
     return render_template(
-        "forecast.html",
+
+        'model_summary.html',
+
         data=data
     )
-@stock_bp.route('/comparison')
-def comparison():
+
+
+# Company
+
+@stock_bp.route('/company/<ticker>')
+def company(ticker):
+
+    ticker = ticker.upper()
+
+    generate_forecast(
+        ticker
+    )
 
     df = pd.read_csv(
-        "output/comparison_results.csv"
+
+        f"output/forecast_results/{ticker}.csv"
+
     )
 
     data = df.values.tolist()
 
     return render_template(
-        "comparison.html",
-        data=data
+
+        'company_forecast.html',
+
+        data=data,
+
+        ticker=ticker
     )
